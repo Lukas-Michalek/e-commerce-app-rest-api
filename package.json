@@ -1,0 +1,25 @@
+{
+  "name": "portfolio-project-e-commerce-app-rest-api",
+  "version": "1.0.0",
+  "description": "Fully-functioning e-commerce application REST API that allows users to perform various CRUD operations such as registering an account, browsing products for sale and so on.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Lukas-Michalek/e-commerce-app-rest-api.git"
+  },
+  "author": "Lukas Michalek",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Lukas-Michalek/e-commerce-app-rest-api/issues"
+  },
+  "homepage": "https://github.com/Lukas-Michalek/e-commerce-app-rest-api#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
+}
