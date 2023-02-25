@@ -14,19 +14,22 @@ const userRoutes = require('./routes/userRoutes');
 const dotenv = require('dotenv').config()
 const PORT = process.env.PORT || 4000;
 
+// The express.json() function is a built-in middleware function in Express. It parses incoming requests with JSON payloads and is based on body-parser.
+app.set('view engine', 'ejs');
+
 
 // This middleware allows me to 
 app.use(express.json());
 
 // This piece of middleware allows us to send details from the Front End such as name, email and password details to our server
-app.use(express.urlencoded({ extended: false }))
+app.use(express.urlencoded({ extended: false }));
 
 
 
 
 app.get('/', (request, response) => {
     response.send('Hello from the Server Side!')
-})
+});
 
 
 // All user related routes
