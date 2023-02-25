@@ -11,6 +11,11 @@ const flash = require('express-flash');
 const pool = require('./../db/dbConnect');
 const queries = require('./../db/queries');
 
+const passport = require('passport');
+const initializePassport = require('./../config/passportConfig');
+
+initializePassport(passport);
+
 const router = Router()
 
 router.use(
@@ -23,6 +28,10 @@ router.use(
     })
 )
 
+router.use(passport.initialize());
+
+router.use(passport.session());
+
 router.use(flash());
 
 
@@ -31,11 +40,15 @@ router.get('/getallusers', userController.getAllUsers)
 
 router.get('/register', (request, response) => {
     response.render('register')
-})
+});
 
 router.get('/login', (request, response) => {
     response.render('login')
-})
+});
+
+router.get('/dashboard', (request, response) => {
+    response.render('dashboard')
+});
 
 router.post('/register', async (request, response) => {
     const { first_name, last_name, email, password, password2 } = request.body
@@ -130,5 +143,16 @@ router.post('/register', async (request, response) => {
         })
     }
 })
+
+// what failureFlash: true does is that if we can not authenticate, express will render one of the false messages in passportConfig usch as {message: "Email is not registered / User does no exist."} or { message: "Password is not correct!"});
+
+router.post(
+    '/login',
+    passport.authenticate('local', {
+        successRedirect: '/users/dashboard',
+        failureRedirect: '/users/login',
+        failureFlash: true,
+    }) 
+)
 
 module.exports = router
