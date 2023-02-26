@@ -25,3 +25,14 @@ Passport's sole purpose is to authenticate requests, which it does through an ex
 
 ### Note to self
  - I have started with nodemon and changing start script in package.json accordingly
+
+### Project Structure
+ - Create table users
+ - Start Server
+ - Connect Database
+ - Create ejs views(index, dashboard, register, login)
+ - Create route for users
+   - implement register
+   - implement login
+   - implement logout
+   - add checkAuthenticated middleware

@@ -14,6 +14,9 @@ const queries = require('./../db/queries');
 const passport = require('passport');
 const initializePassport = require('./../config/passportConfig');
 
+//middleware
+const userAuthentication = require('./../middleware/userAuthentication');
+
 initializePassport(passport);
 
 const router = Router()
@@ -38,17 +41,32 @@ router.use(flash());
 // get all users (testing purposes)
 router.get('/getallusers', userController.getAllUsers)
 
-router.get('/register', (request, response) => {
+router.get('/register', userAuthentication.checkIfAuthenticated, (request, response) => {
     response.render('register')
 });
 
-router.get('/login', (request, response) => {
+router.get('/login', userAuthentication.checkIfAuthenticated, (request, response) => {
     response.render('login')
 });
 
-router.get('/dashboard', (request, response) => {
-    response.render('dashboard')
+router.get('/dashboard', userAuthentication.checkIfNotAuthenticated,(request, response) => {
+    response.render('dashboard', { user: request.user.first_name})
 });
+
+
+// request.logOut() is a function that we get in passport
+router.get('/logout', (request, response, next) => {
+    request.logOut(function(error){
+        if(error) return next(error);
+
+        request.flash(
+            'success_message',
+            'You have successfuly logged out!');
+            response.redirect('/users/login');
+    })
+})
+
+
 
 router.post('/register', async (request, response) => {
     const { first_name, last_name, email, password, password2 } = request.body
