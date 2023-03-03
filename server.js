@@ -28,7 +28,7 @@ app.use(express.urlencoded({ extended: false }));
 
 
 app.get('/', (request, response) => {
-    response.send('Hello from the Server Side!')
+    response.render('This is the first thing user sees')
 });
 
 

@@ -36,3 +36,6 @@ Passport's sole purpose is to authenticate requests, which it does through an ex
    - implement login
    - implement logout
    - add checkAuthenticated middleware
+
+### Additional Info
+ - The first page that customer sees is DASHBOARD where he will see all of the products. He is then able to pick any product he wants and place it into the cart. When he will want to confirm the cart and pay, then he is checked if Authenticated(if he is logged in)
